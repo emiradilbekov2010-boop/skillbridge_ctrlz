@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SkillBridge — мост между джуниорами и HR</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%235b5ef4'/%3E%3Cpath d='M7 27Q20 8 33 27M5 27H35M13.5 27V20M20 27V17.5M26.5 27V20' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#f7f8fc;--surface:#fff;--text:#161a2e;--muted:#5d6482;--line:#e4e7f2;--brand:#5b5ef4;--brand2:#12b8a6;--soft:#eef0ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1220;--surface:#171b30;--text:#eef0fb;--muted:#9aa1c4;--line:#262b48;--soft:#1f2442;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1220;--surface:#171b30;--text:#eef0fb;--muted:#9aa1c4;--line:#262b48;--soft:#1f2442;color-scheme:dark}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:16px 0}
+.logo{font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px;color:var(--text);text-decoration:none}
+.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;font-style:normal;font-size:16px}
+.links{display:flex;gap:4px;flex-wrap:wrap}
+.links a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:600;padding:8px 14px;border-radius:10px}
+.links a:hover{color:var(--text)}
+.links a.on{background:var(--soft);color:var(--brand)}
+.btn{display:inline-block;background:var(--brand);color:#fff!important;padding:13px 24px;border-radius:12px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font:600 16px inherit;font-family:inherit}
+.btn.ghost{background:var(--soft);color:var(--brand)!important}
+.page{display:none;animation:fade .35s ease}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{text-align:center;padding:48px 0 32px}
+.tag{display:inline-block;background:var(--soft);color:var(--brand);padding:6px 14px;border-radius:99px;font-size:14px;font-weight:600}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.1;margin:20px 0 16px;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:640px;margin:0 auto 28px;color:var(--muted);font-size:18px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+section{padding:36px 0}
+h2{font-size:clamp(26px,4vw,36px);margin:0 0 8px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 28px;max-width:620px}
+.ph{padding:32px 0 8px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h3{margin:12px 0 6px;font-size:19px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.ic{width:44px;height:44px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:22px}
+.num{font-weight:800;color:var(--brand);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;text-align:center}
+.stats b{display:block;font-size:32px;color:var(--brand);line-height:56px}
+.stats span{color:var(--muted);font-size:14px}
+.stats svg{width:56px;height:56px;display:block;margin:0 auto}
+.hh{transform-origin:32px 32px;animation:sp 12s linear infinite}
+.mh{transform-origin:32px 32px;animation:sp 2s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px}
+.tabs{display:inline-flex;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:20px}
+.tabs button{border:0;background:none;padding:9px 18px;border-radius:9px;font:600 15px inherit;font-family:inherit;color:var(--muted);cursor:pointer}
+.tabs button.on{background:var(--surface);color:var(--brand);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.panel{display:none}.panel.on{display:block}
+.cand{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;display:grid;place-items:center;font-weight:700;font-size:18px}
+.cand small{color:var(--muted)}
+.sk{margin:14px 0}
+.sk .r{display:flex;justify-content:space-between;font-size:15px;font-weight:600;margin-bottom:6px}
+.bar{height:10px;background:var(--soft);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:99px;transition:width 1s ease}
+.note{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted);margin-top:16px}
+.task{border:1px dashed var(--line);border-radius:14px;padding:16px}
+.task code{background:var(--soft);padding:2px 6px;border-radius:6px;font-size:14px}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.opts button{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:9px 14px;border-radius:10px;cursor:pointer;font:inherit;font-size:14px}
+.opts button:hover{border-color:var(--brand)}
+.opts button.ok{background:#12b8a622;border-color:var(--brand2)}
+.opts button.bad{background:#ef444422;border-color:#ef4444}
+.fb{margin-top:10px;font-size:14px;min-height:22px}
+.team{display:flex;gap:16px;flex-wrap:wrap}
+.team .card{flex:1;min-width:180px;text-align:center}
+.team .av{margin:0 auto 10px}
+.final{text-align:center;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:24px;padding:44px 24px;margin:24px 0}
+.final p{opacity:.9;max-width:520px;margin:0 auto 22px}
+.final .btn{background:#fff;color:var(--brand)!important}
+.tk{display:grid;gap:16px;grid-template-columns:1fr 1fr;align-items:start}@media(max-width:760px){.tk{grid-template-columns:1fr}}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}.meta span{background:var(--soft);color:var(--brand);padding:4px 12px;border-radius:99px;font-size:13px;font-weight:600}
+.req{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:15px}.req li{margin:8px 0}
+.card code{background:var(--soft);padding:2px 6px;border-radius:6px;font-size:14px;color:var(--text)}
+textarea.code{width:100%;min-height:250px;margin-top:10px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:14px;resize:vertical;tab-size:2}
+.tests{list-style:none;padding:0;margin:14px 0 0}.tests li{padding:8px 12px;border-radius:10px;margin-bottom:6px;font-size:14px;background:var(--soft)}.tests li.p{background:#12b8a622}.tests li.f{background:#ef444422}
+pre.ref{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-size:13px;margin:12px 0 0;display:none}
+.logo svg{width:36px;height:36px;flex:none}.lt b{color:var(--brand);font-weight:800}
+.hlogo{width:80px;height:80px;margin:0 auto 16px;display:block;animation:fl 4s ease-in-out infinite;filter:drop-shadow(0 8px 16px rgba(91,94,244,.35))}
+@keyframes fl{50%{transform:translateY(-6px)}}
+.trk{display:flex;flex-wrap:wrap;gap:4px;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:20px;width:fit-content;max-width:100%}
+.trk button{border:0;background:none;padding:9px 16px;border-radius:9px;font:600 15px inherit;font-family:inherit;color:var(--muted);cursor:pointer}
+.trk button.on{background:var(--surface);color:var(--brand);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.tr{display:none}.tk.tr.on{display:grid}.tr.on:not(.tk){display:block}
+.qz{margin-bottom:16px}
+.mock{background:#e6e8ef;border-radius:14px;padding:16px;max-width:340px;margin:12px 0;font-size:13px}
+.mock .t{color:#b5b9c9;font-size:15px;margin-bottom:10px}
+.mock .f{border:1px solid #d3d6e2;border-radius:8px;padding:10px;color:#b9bdcc;margin-bottom:8px}
+.mock .e{color:#d33;font-size:12px;margin:4px 0}
+.mock .bt{display:flex;gap:8px;margin-top:10px}.mock .bt span{flex:1;text-align:center;padding:9px;border-radius:8px;background:#cfd3e0;color:#9aa0b8}
+.sw{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.sw span{padding:10px 18px;border-radius:10px;color:#fff;font-weight:600;font-size:14px}
+.qo{display:block;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0;cursor:pointer;font-size:15px;color:var(--text)}
+.qo:hover{border-color:var(--brand)}.qo input{margin-right:8px;accent-color:var(--brand)}
+.qo small{display:block;color:var(--muted);margin-top:4px;font-size:13px}
+.qo.p{background:#12b8a622;border-color:var(--brand2)}.qo.f{background:#ef444422;border-color:#ef4444}.qo.m{border-style:dashed;border-color:var(--brand2)}
+.lang{display:inline-flex;margin-left:8px;background:var(--soft);border-radius:10px;padding:3px}.lang button{border:0;background:none;padding:6px 10px;border-radius:8px;font:700 13px inherit;font-family:inherit;color:var(--muted);cursor:pointer}.lang button.on{background:var(--surface);color:var(--brand)}
+.links a{padding:8px 11px;font-size:14px}
+table.tb{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);font-size:15px}.tb th,.tb td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}.tb th{background:var(--soft);color:var(--brand)}.tw{overflow-x:auto;border-radius:14px;margin:16px 0}
+.qt{border-left:4px solid var(--brand);background:var(--soft);padding:16px 20px;border-radius:0 14px 14px 0;font-size:18px;font-weight:600;margin:24px 0}
+ul.ls,ol.ls{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:15px}.ls li{margin:6px 0}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:24px 0}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="lgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b5ef4"/><stop offset="1" stop-color="#12b8a6"/></linearGradient></defs><symbol id="lg" viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="url(#lgg)"/><path d="M7 27Q20 8 33 27" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M5 27H35M13.5 27V20M20 27V17.5M26.5 27V20" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="7" cy="27" r="2.2" fill="#fff"/><circle cx="33" cy="27" r="2.2" fill="#fff"/></symbol></svg>
+<div class="wrap">
+<nav>
+  <a class="logo" href="#home"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#lg"/></svg><span class="lt">Skill<b>Bridge</b></span></a>
+  <div class="links">
+    <a href="#home" data-p="home">Главная</a>
+    <a href="#how" data-p="how">Как это работает</a>
+    <a href="#audience" data-p="audience">Аудитория</a>
+    <a href="#result" data-p="result">Результат</a>
+    <a href="#pain" data-p="pain">Проверка боли</a>
+    <a href="#demo" data-p="demo">Демо</a>
+    <a href="#tasks" data-p="tasks">Примеры задач</a>
+    <a href="#team" data-p="team">Команда</a>
+    <span class="lang"><button class="on" data-l="ru">RU</button><button data-l="ky">КЫ</button><button data-l="en">EN</button></span>
+  </div>
+</nav>
+
+<main>
+<!-- ГЛАВНАЯ -->
+<div class="page" id="home">
+  <header class="hero">
+    <svg class="hlogo" viewBox="0 0 40 40" role="img" aria-label="SkillBridge"><use href="#lg"/></svg>
+    <span class="tag">ИИ для честного найма</span>
+    <h1 id="h1">Нанимайте по <span>навыкам</span>,<br>а не по строчкам в резюме</h1>
+    <p class="lead">SkillBridge помогает джуниорам доказать, что они умеют, а HR-специалистам — быстро и объективно проверить это.</p>
+    <div class="cta"><a class="btn" href="#demo">Попробовать демо</a><a class="btn ghost" href="#how">Узнать больше</a></div>
+  </header>
+  <section>
+    <div class="stats">
+      <div class="card"><b>0 лет</b><span>опыта — не приговор</span></div>
+      <div class="card">
+        <svg viewBox="0 0 64 64" aria-label="Часы"><circle cx="32" cy="32" r="28" fill="none" stroke="var(--brand)" stroke-width="4"/><g stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><path d="M32 8v4M32 52v4M8 32h4M52 32h4"/></g><line class="hh" x1="32" y1="32" x2="32" y2="19" stroke="var(--text)" stroke-width="3.5" stroke-linecap="round"/><line class="mh" x1="32" y1="32" x2="32" y2="13" stroke="var(--brand2)" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="var(--brand)"/></svg>
+        <span>за короткое время</span>
+      </div>
+      <div class="card"><b>100%</b><span>решение по умениям</span></div>
+      <div class="card"><b>ИИ</b><span>объясняет каждую оценку</span></div>
+    </div>
+  </section>
+  <section>
+    <h2>Проблема, которую мы решаем</h2>
+    <p class="sub">У джуниоров нет опыта, чтобы пройти фильтр резюме. У HR нет времени и экспертизы, чтобы проверять каждого кандидата вручную.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">😕</div><h3>Для джуниоров</h3><p>«Нужен опыт 2 года» для первой работы — замкнутый круг. Реальные умения остаются незамеченными.</p></div>
+      <div class="card"><div class="ic">⏳</div><h3>Для HR</h3><p>Сотни откликов, одинаковые резюме и сложно понять, кто действительно умеет, а кто просто красиво пишет.</p></div>
+      <div class="card"><div class="ic">🌉</div><h3>Наше решение</h3><p>ИИ строит мост: оценивает практические навыки и показывает их HR в понятном виде.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Для кого и зачем</h2>
+    <p class="sub">Аудитория, фокус на результате и проверка боли.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">👥</div><h3>Аудитория</h3><p>Джуниоры и выпускники без опыта работы, а также работодатели и HR-специалисты, которые нанимают начинающих.</p></div>
+      <div class="card"><div class="ic">🎯</div><h3>Фокус на результате</h3><p>Мы измеряем не количество откликов, а результат: сколько кандидатов подтвердили навыки и дошли до интервью.</p></div>
+      <div class="card"><div class="ic">🔍</div><h3>Проверка боли</h3><p>Сначала проверяем, что проблема реальна:<br>✓ Интервью с джуниорами и HR<br>✓ Замер времени на первичный отбор<br>✓ Тест прототипа на реальных заданиях</p></div>
+    </div>
+  </section>
+  <div class="final"><h2>Давайте строить честный найм вместе</h2><p>Посмотрите, как SkillBridge работает для джуниоров и HR.</p><a class="btn" href="#demo">Открыть демо</a></div>
+</div>
+
+<!-- КАК ЭТО РАБОТАЕТ -->
+<div class="page" id="how">
+  <div class="ph"><h2>Как это работает</h2><p class="sub">Три простых шага — от профиля до оффера.</p></div>
+  <div class="grid">
+    <div class="card"><span class="num">ШАГ 1</span><h3>Джуниор показывает умения</h3><p>Выполняет короткие практические задания или подключает проекты и код. Опыт работы не нужен.</p></div>
+    <div class="card"><span class="num">ШАГ 2</span><h3>ИИ оценивает навыки</h3><p>Анализирует решения, определяет уровень по каждому навыку и объясняет, почему поставил такую оценку.</p></div>
+    <div class="card"><span class="num">ШАГ 3</span><h3>HR находит подходящих</h3><p>Видит подтверждённые навыки, сравнивает кандидатов с требованиями вакансии и приглашает лучших.</p></div>
+  </div>
+  <section>
+    <h2>Что получает каждая сторона</h2>
+    <p class="sub">Выигрывают и кандидаты, и работодатели.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🎓</div><h3>Джуниоры</h3><p>✓ Шанс показать себя без опыта<br>✓ Честная обратная связь от ИИ<br>✓ Понимание, что подтянуть<br>✓ Подбор подходящих вакансий</p></div>
+      <div class="card"><div class="ic">💼</div><h3>HR-специалисты</h3><p>✓ Проверка навыков за минуты<br>✓ Объективное сравнение кандидатов<br>✓ Меньше предвзятости<br>✓ Экономия времени на скрининге</p></div>
+    </div>
+  </section>
+  <div class="final"><h2>Хотите увидеть в деле?</h2><p>Короткое демо покажет оба взгляда на платформу.</p><a class="btn" href="#demo">Попробовать демо</a></div>
+</div>
+
+<!-- ДЕМО -->
+<div class="page" id="demo">
+  <div class="ph"><h2>Попробуйте демо</h2><p class="sub">Так выглядит SkillBridge глазами джуниора и HR-специалиста.</p></div>
+  <div class="demo">
+    <div class="tabs"><button class="on" data-t="p1">Я джуниор</button><button data-t="p2">Я HR</button></div>
+    <div class="panel on" id="p1">
+      <div class="task">
+        <b>Задание по JavaScript</b>
+        <p style="margin:6px 0">Что вернёт выражение <code>[1, 2, 3].map(x =&gt; x * 2)</code>?</p>
+        <div class="opts" id="opts"><button data-ok="0">[1, 2, 3]</button><button data-ok="1">[2, 4, 6]</button><button data-ok="0">6</button></div>
+        <div class="fb" id="fb"></div>
+      </div>
+      <div class="note">ИИ оценивает не только ответ, но и ход решения — и подсказывает, что изучить дальше.</div>
+    </div>
+    <div class="panel" id="p2">
+      <div class="cand"><div class="av">АК</div><div><b>Алия К.</b><br><small>Junior Frontend · опыта нет, 3 проекта</small></div></div>
+      <div id="skills"></div>
+      <div class="note">🤖 ИИ: «Уверенно владеет вёрсткой и JS. Рекомендуем дать тестовое по React — пробел небольшой.»</div>
+      <p style="margin:18px 0 0"><button class="btn" id="inv">Пригласить на интервью</button></p>
+    </div>
+  </div>
+</div>
+
+<!-- АУДИТОРИЯ -->
+<div class="page" id="audience">
+  <div class="ph"><h2>Наша аудитория</h2><p class="sub">Мы проектируем продукт в первую очередь для HR: решение о его использовании принимает именно он.</p></div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--brand)"><span class="num">ОСНОВНОЙ ПОЛЬЗОВАТЕЛЬ</span><h3>HR-специалисты и рекрутеры</h3><p>Получают отклики, смотрят резюме и портфолио, отсеивают неподходящих, формируют шортлист для нанимающего менеджера, назначают интервью и отвечают за скорость и качество найма.</p><div class="note">Главная задача: быстро найти среди многих откликов тех, кто действительно подходит на роль.</div></div>
+    <div class="card"><div class="ic">😣</div><h3>Боли HR</h3><ul class="ls"><li>Слишком много резюме и откликов</li><li>Портфолио долго проверять вручную</li><li>Непонятно, что именно кандидат делал сам</li><li>Красиво рассказывает о навыках, но на практике слабее</li><li>Тесты не показывают работу в реальных условиях</li><li>Легко потратить время на интервью с неподходящим</li></ul></div>
+    <div class="card"><div class="ic">✅</div><h3>Что HR хочет получить</h3><ul class="ls"><li>Меньше времени на первичный отбор</li><li>Более релевантный шортлист</li><li>Понятные доказательства навыков</li><li>Меньше риска ошибиться с кандидатом</li><li>Уверенность перед передачей кандидата менеджеру</li></ul></div>
+  </div>
+  <div class="qt">HR хочет не больше кандидатов, а меньше, но подходящих.</div>
+  <section>
+    <h2>Вторичная аудитория: молодые специалисты</h2>
+    <p class="sub">Те, у кого есть реальные работы, но нет достаточного официального опыта: студенты, выпускники, джуны, фрилансеры, люди после курсов, участники пет-проектов и волонтёрских проектов.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🔒</div><h3>Их проблема</h3><ul class="ls"><li>Навыки есть, но их сложно доказать</li><li>В резюме написано «без опыта»</li><li>Портфолио есть, но HR не видит их вклад</li><li>Замкнутый круг: для роста до middle нужен опыт, а для опыта — сильное резюме</li></ul></div>
+      <div class="card"><div class="ic">🚀</div><h3>Что они хотят</h3><ul class="ls"><li>Показать реальные работы</li><li>Доказать свой уровень</li><li>Попасть в шортлист на более сильные вакансии</li><li>Понять, чего не хватает до middle</li></ul></div>
+    </div>
+    <div class="note">Кандидат — участник платформы, но решение об использовании SkillBridge принимает HR.</div>
+  </section>
+  <div class="final"><h2>Какой результат мы даём?</h2><p>Не функции платформы, а изменения в работе HR.</p><a class="btn" href="#result">К результату</a></div>
+</div>
+
+<!-- РЕЗУЛЬТАТ -->
+<div class="page" id="result">
+  <div class="ph"><h2>Результат, который мы даём</h2><p class="sub">Не функции платформы, а то, что меняется в работе HR после её использования.</p></div>
+  <div class="grid">
+    <div class="card"><div class="ic">❌</div><h3>Не так</h3><p>«Мы делаем платформу с ИИ-анализом портфолио» — это список функций, а не результат.</p></div>
+    <div class="card" style="border-color:var(--brand2)"><div class="ic">✅</div><h3>А так</h3><p>HR за меньшее время получает короткий список кандидатов, которых реально стоит позвать на интервью.</p></div>
+  </div>
+  <section>
+    <h2>Три результата для трёх сторон</h2><p class="sub">&nbsp;</p>
+    <div class="grid">
+      <div class="card"><div class="ic">💼</div><h3>HR</h3><p>SkillBridge помогает сократить время первичного отбора и повысить качество шортлиста за счёт проверяемых доказательств навыков.</p></div>
+      <div class="card"><div class="ic">🎓</div><h3>Кандидат</h3><p>Может доказать реальный уровень навыков через проекты, даже если у него ещё нет официального опыта в компании.</p></div>
+      <div class="card"><div class="ic">🏢</div><h3>Компания</h3><p>Снижает риск найма неподходящего сотрудника и быстрее закрывает middle-вакансии.</p></div>
+    </div>
+    <div class="tw"><table class="tb"><tr><th>Для кого</th><th>Какой результат</th></tr><tr><td>HR</td><td>Быстрее формирует качественный шортлист</td></tr><tr><td>Кандидат</td><td>Доказывает навыки реальными работами</td></tr><tr><td>Компания</td><td>Снижает риск неправильного найма</td></tr></table></div>
+  </section>
+  <div class="qt">Мы продаём не ИИ и не портфолио. Мы продаём уверенность HR в том, что он приглашает на интервью правильных людей.</div>
+  <div class="final"><h2>Боль подтверждена реальными интервью</h2><p>Посмотрите, как мы проверяли, что проблема реальна.</p><a class="btn" href="#pain">Проверка боли</a></div>
+</div>
+
+<!-- ПРОВЕРКА БОЛИ -->
+<div class="page" id="pain">
+  <div class="ph"><h2>Проверка боли</h2><p class="sub">Мы не придумывали проблему — мы проверили её, опросив работодателей и компании.</p></div>
+  <div class="stats">
+    <div class="card"><b>10+</b><span>работодателей и компаний опрошено</span></div>
+    <div class="card"><b>5</b><span>ключевых вопросов о реальном процессе отбора</span></div>
+    <div class="card"><b>Качественное</b><span>исследование, а не статистика</span></div>
+  </div>
+  <section>
+    <div class="grid">
+      <div class="card"><span class="num">ЧТО МЫ СПРАШИВАЛИ</span><ol class="ls"><li>Сколько времени уходит на проверку резюме, портфолио и навыков перед наймом?</li><li>Бывало ли, что кандидат хорошо рассказывал о навыках, но на практике оказывался слабее ожиданий?</li><li>Какие доказательства помогают вам принять решение о кандидате?</li><li>Что самое сложное в отборе?</li><li>Как вы сейчас отличаете джуна от кандидата, готового к middle-задачам?</li></ol></div>
+      <div class="card"><span class="num">КАК МЫ ПРОВЕРЯЛИ</span><h3>Реальный процесс, а не «нравится ли идея»</h3><p>Мы не спрашивали, «нужна ли вам такая платформа». Мы выясняли, как люди отбирают кандидатов сейчас: где теряют время, какие обходные пути используют и что повторяется из раза в раз.</p><div class="note">Вывод аккуратный: это не «всем нужна наша платформа», а подтверждение того, что проблема знакома работодателям.</div></div>
+    </div>
+  </section>
+  <div class="qt">Боль подтверждена: HR тратит время на ручную проверку и всё равно не всегда может отличить реальный уровень кандидата от красивого резюме.</div>
+  <section>
+    <h2>Аудитория → боль → результат</h2><p class="sub">Главная логика проекта на одной странице.</p>
+    <div class="tw"><table class="tb"><tr><th>Аудитория</th><th>Боль</th><th>Результат с SkillBridge</th></tr><tr><td>HR-специалист</td><td>Много откликов, долго проверять резюме и портфолио, сложно понять реальный уровень</td><td>Быстрее получает шортлист с доказательствами</td></tr><tr><td>Кандидат</td><td>Навыки есть, но без официального опыта их нечем подтвердить</td><td>Показывает подтверждённые проекты и уровень готовности</td></tr><tr><td>Компания</td><td>Риск нанять человека слабее, чем он казался</td><td>Больше проверенных кандидатов, меньше ошибочных наймов</td></tr></table></div>
+  </section>
+  <div class="final"><h2>Больше подходящих, а не больше кандидатов</h2><p>SkillBridge даёт HR доказательства вместо обещаний.</p><a class="btn" href="#demo">Попробовать демо</a></div>
+</div>
+
+<!-- ЗАДАЧИ -->
+<div class="page" id="tasks">
+  <div class="ph"><h2>Примеры задач</h2><p class="sub">Так выглядит реальное задание в SkillBridge: условия, автоматические тесты и разбор от ИИ. SkillBridge оценивает не только программистов: выберите направление и решите демо-задачу прямо здесь.</p></div>
+  <div class="trk"><button class="on" data-tr="tr-code">💻 Код</button><button data-tr="tr-ux">🎨 UX/UI дизайн</button><button data-tr="tr-biz">📊 Аналитика и маркетинг</button></div>
+  <div class="tr" id="tr-ux"></div>
+  <div class="tr" id="tr-biz"></div>
+  <div class="tk tr on" id="tr-code">
+    <div class="card">
+      <span class="num">JAVASCRIPT · ЛОГИКА · ГРАНИЧНЫЕ СЛУЧАИ</span>
+      <h3>Корзина интернет-магазина</h3>
+      <div class="meta"><span>Уровень: Junior+</span><span>~20 минут</span><span>8 тестов</span></div>
+      <p>Реализуйте функцию <code>calcTotal(cart, promo)</code>, которая считает итоговую сумму заказа. <code>cart</code> — массив объектов <code>{price, qty}</code>, <code>promo</code> — строка или <code>null</code>.</p>
+      <ol class="req">
+        <li>Сумма заказа — это сумма <code>price × qty</code> по всем товарам.</li>
+        <li>Промокод <code>SAVE10</code> даёт скидку 10%. Промокод <code>FIX500</code> уменьшает сумму на 500, но итог не может быть ниже 0. Неизвестные промокоды игнорируются.</li>
+        <li>Если сумма после скидки <b>больше 5000</b> — доставка бесплатная, иначе добавьте 300.</li>
+        <li>Пустая корзина — итог 0 (без доставки).</li>
+        <li>Результат округлите до 2 знаков после запятой.</li>
+      </ol>
+      <div class="note">🤖 ИИ оценивает не только прохождение тестов, но и подход: как обработаны граничные случаи.</div>
+    </div>
+    <div class="card">
+      <b>Ваше решение</b>
+      <textarea class="code" id="code" spellcheck="false"></textarea>
+      <p style="margin:14px 0 0;display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="run">Проверить решение</button><button class="btn ghost" id="ref">Показать пример решения</button></p>
+      <pre class="ref" id="refpre"></pre>
+      <ul class="tests" id="tests"></ul>
+      <div id="rep" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- КОМАНДА -->
+<div class="page" id="team">
+  <div class="ph"><h2>Команда <span style="color:var(--brand)">Ctrl+z</span></h2><p class="sub">Хакатон-проект SkillBridge: три человека, одна цель — честный найм по навыкам.</p></div>
+  <div class="team">
+    <div class="card" style="border-color:var(--brand)"><div class="av">ИА</div><b>Ишенова Азалия</b><p>👑 Капитан команды</p></div>
+    <div class="card"><div class="av">ШД</div><b>Шукурова Дамили</b><p>Участник команды</p></div>
+    <div class="card"><div class="av">АЭ</div><b>Адилбеков Эмир</b><p>Участник команды</p></div>
+    
+  </div>
+  <div class="final"><h2>Присоединяйтесь к SkillBridge</h2><p>Дайте джуниорам шанс, а HR — инструмент, которому можно доверять.</p><a class="btn" href="#home">На главную</a></div>
+</div>
+</main>
+<footer>© 2026 SkillBridge · Команда Ctrl+z · Проект для хакатона</footer>
+</div>
+
+<script>
+var pages=['home','how','audience','result','pain','demo','tasks','team'];
+function route(){
+  var h=(location.hash||'').slice(1);if(pages.indexOf(h)<0)h='home';
+  pages.forEach(function(p){document.getElementById(p).classList.toggle('on',p===h)});
+  document.querySelectorAll('.links a').forEach(function(a){a.classList.toggle('on',a.dataset.p===h)});
+  window.scrollTo(0,0);
+  if(h==='demo')fill();
+}
+window.addEventListener('hashchange',route);
+route();
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on');
+    if(b.dataset.t==='p2')fill();
+  });
+});
+var data=[['HTML / CSS',90],['JavaScript',78],['Git',70],['React',45]];
+var sk=document.getElementById('skills');
+sk.innerHTML=data.map(function(d){return '<div class="sk"><div class="r"><span>'+d[0]+'</span><span>'+d[1]+'%</span></div><div class="bar"><i data-w="'+d[1]+'"></i></div></div>'}).join('');
+function fill(){
+  if(!document.getElementById('p2').classList.contains('on'))return;
+  sk.querySelectorAll('i').forEach(function(i){i.style.width='0'});
+  setTimeout(function(){sk.querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})},60);
+}
+document.querySelectorAll('#opts button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var ok=b.dataset.ok==='1',fb=document.getElementById('fb');
+    document.querySelectorAll('#opts button').forEach(function(x){x.classList.remove('ok','bad')});
+    b.classList.add(ok?'ok':'bad');
+    fb.textContent=ok?'✅ Верно! map применяет функцию к каждому элементу и возвращает новый массив.':'❌ Не совсем. Подсказка: map создаёт новый массив, применяя функцию к каждому элементу.';
+  });
+});
+document.getElementById('inv').addEventListener('click',function(){this.textContent='✓ Приглашение отправлено';});
+
+var codeEl=document.getElementById('code');
+codeEl.value=['function calcTotal(cart, promo) {','  // ваш код здесь','  ','}'].join('\n');
+var refSol=['function calcTotal(cart, promo) {','  if (!cart.length) return 0;','  var sum = cart.reduce(function (s, i) {','    return s + i.price * i.qty;','  }, 0);','  if (promo === \'SAVE10\') sum *= 0.9;','  else if (promo === \'FIX500\') sum = Math.max(0, sum - 500);','  if (sum <= 5000) sum += 300;','  return Math.round(sum * 100) / 100;','}'].join('\n');
+var TESTS=[
+ ['Сумма заказа и платная доставка',[{price:1000,qty:2}],null,2300,0],
+ ['Промокод SAVE10 (−10%)',[{price:1000,qty:6}],'SAVE10',5400,0],
+ ['Промокод FIX500 (−500)',[{price:300,qty:2}],'FIX500',400,0],
+ ['Скидка не уводит сумму ниже 0',[{price:300,qty:1}],'FIX500',300,1],
+ ['Пустая корзина — итог 0',[],null,0,1],
+ ['Округление до 2 знаков',[{price:33.33,qty:1}],'SAVE10',330,1],
+ ['Неизвестный промокод игнорируется',[{price:1000,qty:1}],'XYZ',1300,1],
+ ['Ровно 5000 — доставка платная',[{price:5000,qty:1}],null,5300,1]
+];
+function addLi(ul,c,txt){var li=document.createElement('li');li.className=c;li.textContent=txt;ul.appendChild(li);}
+document.getElementById('ref').addEventListener('click',function(){
+  var p=document.getElementById('refpre'),show=p.style.display!=='block';
+  p.textContent=refSol;p.style.display=show?'block':'none';
+  this.textContent=show?'Скрыть пример решения':'Показать пример решения';
+});
+function lum(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];}
+function cr(h){return 1.05/(lum(h)+0.05);}
+var cols=[['#f5c518','Жёлтая'],['#6ec6ff','Голубая'],['#1f3a93','Тёмно-синяя'],['#5b5ef4','Фиолетовая']];
+var QUIZ={ux:[
+{sk:'Эвристическая оценка',lvl:'Junior',min:5,multi:1,title:'Что не так с этим экраном оплаты?',q:'Посмотрите на экран и отметьте <b>все</b> реальные проблемы юзабилити.',
+ vis:'<div class="mock"><div class="t">Оплата заказа</div><div class="f">Номер карты</div><div class="f">Срок / CVC</div><div class="e">Ошибка!</div><div class="bt"><span>Оплатить</span><span>Отмена</span></div></div>',
+ opts:[['Подписи полей исчезают — остаются только подсказки внутри полей',1,'Верно: после ввода пользователь забывает, что это за поле.'],['Кнопки «Оплатить» и «Отмена» выглядят одинаково',1,'Верно: нет главного действия, легко нажать не туда.'],['Серый текст на сером фоне плохо читается',1,'Верно: слабый контраст — проблема доступности.'],['Сообщение «Ошибка!» не объясняет, что исправить',1,'Верно: хорошая ошибка говорит, что случилось и как это исправить.'],['Между блоками слишком много свободного места',0,'Нет: воздух на экране оплаты скорее помогает, чем мешает.'],['На экране используется один шрифт',0,'Нет: один шрифт — нормальная практика, это не проблема.']]},
+{sk:'Доступность (WCAG)',lvl:'Junior',min:3,multi:1,title:'Какие кнопки проходят проверку контраста?',q:'Белый текст на цветной кнопке. Отметьте <b>все</b> варианты с контрастом не ниже <b>4,5 : 1</b> (WCAG AA).',
+ vis:'<div class="sw">'+cols.map(function(c){return '<span style="background:'+c[0]+'">Оплатить</span>'}).join('')+'</div>',
+ opts:cols.map(function(c){var r=cr(c[0]),ok=r>=4.5;return [c[1]+' кнопка',ok?1:0,'Контраст '+r.toFixed(1).replace('.',',')+' : 1 — '+(ok?'проходит AA.':'не проходит AA.')]})},
+{sk:'UX-исследования',lvl:'Junior+',min:4,multi:0,title:'Пользователи бросают корзину на шаге оплаты',q:'60% пользователей уходят на шаге оплаты. С чего начнёте?',
+ opts:[['Посмотрю воронку и записи сессий, затем проведу 5 коротких интервью',1,'Верно: сначала выясняем причину, потом лечим.'],['Сразу сделаю кнопку «Оплатить» ярче',0,'Рано: без понимания причины это гадание — дело может быть вообще не в кнопке.'],['Добавлю ещё один шаг с подтверждением данных',0,'Скорее ухудшит ситуацию: чем больше шагов, тем больше уходов.'],['Запущу акцию со скидкой',0,'Это лечит симптом, а не причину ухода.']]}
+],biz:[
+{sk:'Аналитика',lvl:'Junior',min:4,multi:0,title:'Конверсия регистрации упала с 4% до 2%',q:'После релиза в четверг конверсия упала вдвое. Что проверите первым?',
+ opts:[['Сравню падение по устройствам и источникам трафика и сверю с временем релиза',1,'Верно: нужно найти, где именно упало, и связать это с изменением.'],['Сразу откачу релиз, не глядя на данные',0,'Рискованно: можно откатить нужное и не найти настоящую причину.'],['Подожду неделю — само восстановится',0,'Потери растут каждый день, ждать без анализа нельзя.'],['Запущу рекламу, чтобы привести больше людей',0,'Больше трафика при сломанной воронке — лишние траты.']]},
+{sk:'Маркетинг',lvl:'Junior',min:4,multi:1,title:'Как привлечь первых 200 студентов?',q:'Бюджет — 100 000 ₽, продукт — сервис для студентов. Отметьте <b>все</b> подходящие каналы.',
+ opts:[['Студенческие сообщества и чаты вузов',1,'Верно: недорого и точно в целевую аудиторию.'],['Партнёрство с онлайн-курсами и университетами',1,'Верно: доверие и готовая аудитория.'],['Микроинфлюенсеры-студенты',1,'Верно: личные рекомендации работают лучше рекламы.'],['Ролик на федеральном ТВ',0,'Нет: дорого и размыто, бюджета не хватит.'],['Билборды по всей стране',0,'Нет: охват огромный, а целевых людей мало.']]}
+]};
+function renderQuiz(hostId,tasks){
+  var host=document.getElementById(hostId);
+  tasks.forEach(function(t,ti){
+    var id=hostId+ti,card=document.createElement('div');
+    card.className='card qz';
+    card.innerHTML='<span class="num">'+t.sk.toUpperCase()+'</span><h3>'+t.title+'</h3><div class="meta"><span>Уровень: '+t.lvl+'</span><span>~'+t.min+' мин</span></div><p>'+t.q+'</p>'+(t.vis||'')+t.opts.map(function(o){return '<label class="qo"><input type="'+(t.multi?'checkbox':'radio')+'" name="'+id+'"> '+o[0]+'<small></small></label>'}).join('')+'<p style="margin:12px 0 0"><button class="btn">Проверить ответ</button></p><div class="res"></div>';
+    host.appendChild(card);
+    card.querySelector('button').addEventListener('click',function(){
+      var labels=card.querySelectorAll('.qo'),res=card.querySelector('.res'),right=0,wrong=0,tot=0,any=false;
+      t.opts.forEach(function(o,i){if(labels[i].querySelector('input').checked)any=true;});
+      if(!any){res.innerHTML='<div class="note">Выберите хотя бы один вариант.</div>';return;}
+      t.opts.forEach(function(o,i){
+        var l=labels[i],on=l.querySelector('input').checked;
+        l.classList.remove('p','f','m');l.querySelector('small').textContent=o[2];
+        if(o[1])tot++;
+        if(on&&o[1]){right++;l.classList.add('p');}else if(on){wrong++;l.classList.add('f');}else if(o[1]){l.classList.add('m');}
+      });
+      var pct=Math.max(0,Math.round((right-wrong)/tot*100));
+      var v=pct>=90?'🤖 ИИ: Отличный ответ — кандидат уверенно владеет этим навыком.':pct>=50?'🤖 ИИ: Хорошая база, но часть деталей упущена. Рекомендуем разобрать отмеченные пункты.':'🤖 ИИ: Навык пока развит слабо. Предложим кандидату материалы и повторную попытку.';
+      res.innerHTML='<h3 style="margin:16px 0 4px">Отчёт для HR</h3><div class="sk"><div class="r"><span>'+t.sk+'</span><span>'+pct+'%</span></div><div class="bar"><i data-w="'+pct+'"></i></div></div><div class="note">'+v+'</div>';
+      setTimeout(function(){res.querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})},60);
+    });
+  });
+}
+renderQuiz('tr-ux',QUIZ.ux);renderQuiz('tr-biz',QUIZ.biz);
+document.querySelectorAll('.trk button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.trk button').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.tr').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');document.getElementById(b.dataset.tr).classList.add('on');
+  });
+});
+var D=[
+['Главная','Башкы бет','Home'],
+['Как это работает','Бул кантип иштейт','How it works'],
+['Демо','Демо','Demo'],
+['Примеры задач','Тапшырма мисалдары','Sample tasks'],
+['Команда','Команда','Team'],
+['ИИ для честного найма','Адилеттүү жумушка алуу үчүн ЖИ','AI for fair hiring'],
+['SkillBridge помогает джуниорам доказать, что они умеют, а HR-специалистам — быстро и объективно проверить это.','SkillBridge джуниорлорго эмне кыла алаарын далилдөөгө, ал эми HR-адистерге муну тез жана объективдүү текшерүүгө жардам берет.','SkillBridge helps juniors prove what they can do, and helps HR specialists verify it quickly and objectively.'],
+['Попробовать демо','Демону байкап көрүү','Try the demo'],
+['Узнать больше','Көбүрөөк билүү','Learn more'],
+['0 лет','0 жыл','0 years'],
+['опыта — не приговор','тажрыйба — өкүм эмес','of experience is not a verdict'],
+['за короткое время','кыска убакытта','in a short time'],
+['решение по умениям','чечим көндүмдөр боюнча','decisions based on skills'],
+['ИИ','ЖИ','AI'],
+['объясняет каждую оценку','ар бир баанын себебин түшүндүрөт','explains every score'],
+['Проблема, которую мы решаем','Биз чечкен көйгөй','The problem we solve'],
+['У джуниоров нет опыта, чтобы пройти фильтр резюме. У HR нет времени и экспертизы, чтобы проверять каждого кандидата вручную.','Джуниорлордо резюме чыпкасынан өтө турган тажрыйба жок. HR-адистерде ар бир талапкерди кол менен текшерүүгө убакыт жана экспертиза жетишпейт.','Juniors lack the experience to pass the résumé filter. HR lacks the time and expertise to check every candidate by hand.'],
+['Для джуниоров','Джуниорлор үчүн','For juniors'],
+['«Нужен опыт 2 года» для первой работы — замкнутый круг. Реальные умения остаются незамеченными.','Биринчи жумуш үчүн «2 жыл тажрыйба керек» — жабык чөйрө. Чыныгы көндүмдөр байкалбай калат.','“2 years of experience required” for a first job is a vicious circle. Real skills go unnoticed.'],
+['Для HR','HR үчүн','For HR'],
+['Сотни откликов, одинаковые резюме и сложно понять, кто действительно умеет, а кто просто красиво пишет.','Жүздөгөн отклик, окшош резюмелер жана кимдин чындап билгенин, кимиси жөн эле кооз жазганын түшүнүү кыйын.','Hundreds of applications, similar résumés, and it is hard to tell who can truly do the job and who just writes well.'],
+['Наше решение','Биздин чечим','Our solution'],
+['ИИ строит мост: оценивает практические навыки и показывает их HR в понятном виде.','ЖИ көпүрө курат: практикалык көндүмдөрдү баалап, аларды HR-адистерге түшүнүктүү түрдө көрсөтөт.','AI builds the bridge: it assesses practical skills and shows them to HR in a clear form.'],
+['Для кого и зачем','Кимдер үчүн жана эмне үчүн','Who it is for and why'],
+['Аудитория, фокус на результате и проверка боли.','Аудитория, натыйжага багытталуу жана көйгөйдү текшерүү.','Audience, focus on results and pain validation.'],
+['Аудитория','Аудитория','Audience'],
+['Джуниоры и выпускники без опыта работы, а также работодатели и HR-специалисты, которые нанимают начинающих.','Жумуш тажрыйбасы жок джуниорлор жана бүтүрүүчүлөр, ошондой эле башталгыч адистерди жумушка алган иш берүүчүлөр жана HR-адистер.','Juniors and graduates without work experience, plus employers and HR specialists who hire beginners.'],
+['Фокус на результате','Натыйжага багытталуу','Focus on results'],
+['Мы измеряем не количество откликов, а результат: сколько кандидатов подтвердили навыки и дошли до интервью.','Биз отклик санын эмес, натыйжаны өлчөйбүз: канча талапкер көндүмдөрүн тастыктап, маегге жетти.','We measure results, not the number of applications: how many candidates proved their skills and reached an interview.'],
+['Проверка боли','Көйгөйдү текшерүү','Pain validation'],
+['Сначала проверяем, что проблема реальна:','Адегенде көйгөй чын эле бар экенин текшеребиз:','First we check that the problem is real:'],
+['✓ Интервью с джуниорами и HR','✓ Джуниорлор жана HR-адистер менен маектешүү','✓ Interviews with juniors and HR'],
+['✓ Замер времени на первичный отбор','✓ Алгачкы тандоого кеткен убакытты өлчөө','✓ Measuring time spent on first screening'],
+['✓ Тест прототипа на реальных заданиях','✓ Прототипти чыныгы тапшырмаларда сыноо','✓ Testing the prototype on real tasks'],
+['Давайте строить честный найм вместе','Адилеттүү жумушка алууну чогуу курабыз','Let’s build fair hiring together'],
+['Посмотрите, как SkillBridge работает для джуниоров и HR.','SkillBridge джуниорлор жана HR үчүн кантип иштээрин көрүңүз.','See how SkillBridge works for juniors and HR.'],
+['Открыть демо','Демону ачуу','Open the demo'],
+['Три простых шага — от профиля до оффера.','Үч жөнөкөй кадам — профилден оффер чейин.','Three simple steps — from profile to offer.'],
+['ШАГ 1','1-КАДАМ','STEP 1'],['ШАГ 2','2-КАДАМ','STEP 2'],['ШАГ 3','3-КАДАМ','STEP 3'],
+['Джуниор показывает умения','Джуниор көндүмдөрүн көрсөтөт','The junior shows their skills'],
+['Выполняет короткие практические задания или подключает проекты и код. Опыт работы не нужен.','Кыска практикалык тапшырмаларды аткарат же долбоорлорун жана кодун туташтырат. Жумуш тажрыйбасы керек эмес.','They complete short practical tasks or connect their projects and code. No work experience needed.'],
+['ИИ оценивает навыки','ЖИ көндүмдөрдү баалайт','AI assesses the skills'],
+['Анализирует решения, определяет уровень по каждому навыку и объясняет, почему поставил такую оценку.','Чечимдерди талдап, ар бир көндүм боюнча деңгээлди аныктайт жана эмне үчүн мындай баа койгонун түшүндүрөт.','It analyzes the solutions, determines the level for each skill and explains why it gave that score.'],
+['HR находит подходящих','HR ылайыктууларды табат','HR finds the right people'],
+['Видит подтверждённые навыки, сравнивает кандидатов с требованиями вакансии и приглашает лучших.','Тастыкталган көндүмдөрдү көрүп, талапкерлерди вакансиянын талаптары менен салыштырып, мыктыларын чакырат.','They see verified skills, compare candidates with the job requirements and invite the best ones.'],
+['Что получает каждая сторона','Ар бир тарап эмне алат','What each side gets'],
+['Выигрывают и кандидаты, и работодатели.','Талапкерлер дагы, иш берүүчүлөр дагы утат.','Both candidates and employers win.'],
+['Джуниоры','Джуниорлор','Juniors'],['HR-специалисты','HR-адистер','HR specialists'],
+['✓ Шанс показать себя без опыта','✓ Тажрыйбасыз эле өзүн көрсөтүү мүмкүнчүлүгү','✓ A chance to show yourself without experience'],
+['✓ Честная обратная связь от ИИ','✓ ЖИден чынчыл пикир','✓ Honest feedback from AI'],
+['✓ Понимание, что подтянуть','✓ Эмнени жакшыртуу керек экенин түшүнүү','✓ Understanding what to improve'],
+['✓ Подбор подходящих вакансий','✓ Ылайыктуу вакансияларды тандоо','✓ Matching with suitable vacancies'],
+['✓ Проверка навыков за минуты','✓ Көндүмдөрдү мүнөттөр ичинде текшерүү','✓ Skills checked in minutes'],
+['✓ Объективное сравнение кандидатов','✓ Талапкерлерди объективдүү салыштыруу','✓ Objective comparison of candidates'],
+['✓ Меньше предвзятости','✓ Бир жактуулук аз','✓ Less bias'],
+['✓ Экономия времени на скрининге','✓ Скринингге убакытты үнөмдөө','✓ Time saved on screening'],
+['Хотите увидеть в деле?','Иш жүзүндө көргүңүз келеби?','Want to see it in action?'],
+['Короткое демо покажет оба взгляда на платформу.','Кыска демо платформага эки көз караштан көрсөтөт.','A short demo shows both views of the platform.'],
+['Попробуйте демо','Демону байкап көрүңүз','Try the demo'],
+['Так выглядит SkillBridge глазами джуниора и HR-специалиста.','SkillBridge джуниордун жана HR-адистин көзү менен ушундай көрүнөт.','This is how SkillBridge looks through the eyes of a junior and an HR specialist.'],
+['Я джуниор','Мен джуниормун','I am a junior'],['Я HR','Мен HR-мин','I am HR'],
+['Пригласить на интервью','Маегке чакыруу','Invite to interview'],
+['Так выглядит реальное задание в SkillBridge: условия, автоматические тесты и разбор от ИИ. SkillBridge оценивает не только программистов: выберите направление и решите демо-задачу прямо здесь.','SkillBridge’де чыныгы тапшырма ушундай көрүнөт: шарттар, автоматтык тесттер жана ЖИ талдоосу. Багытты тандап, демо-тапшырманы ушул жерден чечиңиз. (Тапшырмалардын тексти азырынча орус тилинде.)','This is what a real SkillBridge task looks like: conditions, automatic tests and an AI review. Pick a track and solve a demo task right here. (Task texts are Russian-only for now.)'],
+['📊 Аналитика и маркетинг','📊 Аналитика жана маркетинг','📊 Analytics & marketing'],
+['🎨 UX/UI дизайн','🎨 UX/UI дизайн','🎨 UX/UI design'],
+['Хакатон-проект SkillBridge: три человека, одна цель — честный найм по навыкам.','SkillBridge хакатон долбоору: үч адам, бир максат — көндүмдөр боюнча адилеттүү жумушка алуу.','SkillBridge hackathon project: three people, one goal — fair hiring by skills.'],
+['👑 Капитан команды','👑 Команда капитаны','👑 Team captain'],
+['Участник команды','Команданын мүчөсү','Team member'],
+['Присоединяйтесь к SkillBridge','SkillBridge’ге кошулуңуз','Join SkillBridge'],
+['Дайте джуниорам шанс, а HR — инструмент, которому можно доверять.','Джуниорлорго мүмкүнчүлүк, ал эми HR-адистерге ишенсе боло турган курал бериңиз.','Give juniors a chance and give HR a tool they can trust.'],
+['На главную','Башкы бетке','Back to home'],
+['© 2026 SkillBridge · Команда Ctrl+z · Проект для хакатона','© 2026 SkillBridge · Ctrl+z командасы · Хакатон долбоору','© 2026 SkillBridge · Team Ctrl+z · Hackathon project']
+];
+D.push(['Результат','Натыйжа','Results'],['Наша аудитория','Биздин аудитория','Our audience'],['Результат, который мы даём','Биз берген натыйжа','The result we deliver'],
+['Мы проектируем продукт в первую очередь для HR: решение о его использовании принимает именно он.','Продуктуну биринчи кезекте HR үчүн түзөбүз: аны колдонуу тууралуу чечимди дал ошол кабыл алат. (Толук тексти азырынча орус тилинде.)','We design the product first of all for HR: they decide whether to use it. (Full text is Russian-only for now.)'],
+['Не функции платформы, а то, что меняется в работе HR после её использования.','Платформанын функциялары эмес, аны колдонгондон кийин HR-дин ишинде эмне өзгөрөрү. (Толук тексти азырынча орус тилинде.)','Not platform features, but what changes in HR’s work after using it. (Full text is Russian-only for now.)'],
+['Мы не придумывали проблему — мы проверили её, опросив работодателей и компании.','Биз көйгөйдү ойлоп тапкан жокпуз — иш берүүчүлөрдөн жана компаниялардан сурап, текшердик. (Толук тексти азырынча орус тилинде.)','We did not invent the problem — we checked it by surveying employers and companies. (Full text is Russian-only for now.)']);
+var LK={ky:{},en:{}};D.forEach(function(r){LK.ky[r[0]]=r[1];LK.en[r[0]]=r[2];});
+var H1={ru:document.getElementById('h1').innerHTML,ky:'Жумушка <span>көндүмдөр</span> боюнча алыңыз,<br>резюмедеги саптар боюнча эмес',en:'Hire by <span>skills</span>,<br>not by lines on a résumé'};
+var TT={ru:document.title,ky:'SkillBridge — джуниорлор менен HR ортосундагы көпүрө',en:'SkillBridge — a bridge between juniors and HR'};
+var origT=new WeakMap();
+function norm(s){return s.replace(/\s+/g,' ').trim();}
+function setLang(l){
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),n;
+  while((n=w.nextNode())){
+    var p=n.parentNode;
+    if(!p||p.tagName==='SCRIPT'||p.tagName==='TEXTAREA'||p.closest('#h1'))continue;
+    var o=origT.get(n);
+    if(o===undefined){o=n.nodeValue;origT.set(n,o);}
+    var k=norm(o);if(!k)continue;
+    var t=l==='ru'?null:LK[l][k];
+    n.nodeValue=t?o.match(/^\s*/)[0]+t+o.match(/\s*$/)[0]:o;
+  }
+  document.getElementById('h1').innerHTML=H1[l];
+  document.title=TT[l];document.documentElement.lang=l;
+  document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l===l)});
+}
+document.querySelectorAll('.lang button').forEach(function(b){
+  b.addEventListener('click',function(){
+    setLang(b.dataset.l);
+    try{localStorage.setItem('sb_lang',b.dataset.l);}catch(e){}
+  });
+});
+var savedL='ru';try{savedL=localStorage.getItem('sb_lang')||'ru';}catch(e){}
+if(savedL!=='ky'&&savedL!=='en')savedL='ru';
+if(savedL!=='ru')setLang(savedL);
+document.getElementById('run').addEventListener('click',function(){
+  var ul=document.getElementById('tests'),rep=document.getElementById('rep'),fn;
+  ul.innerHTML='';rep.style.display='none';
+  try{fn=new Function(codeEl.value+'\n;return typeof calcTotal==="function"?calcTotal:null;')();}
+  catch(e){addLi(ul,'f','Ошибка в коде: '+e.message);return;}
+  if(!fn){addLi(ul,'f','Функция calcTotal не найдена');return;}
+  var pass=[0,0],cnt=[0,0];
+  TESTS.forEach(function(t){
+    var r,ok=false,err='';cnt[t[4]]++;
+    try{r=fn(JSON.parse(JSON.stringify(t[1])),t[2]);ok=typeof r==='number'&&Math.abs(r-t[3])<1e-9;}catch(e){err=e.message;}
+    if(ok)pass[t[4]]++;
+    addLi(ul,ok?'p':'f',(ok?'✓ ':'✗ ')+t[0]+(ok?'':' — ожидалось '+t[3]+', получено '+(err||String(r))));
+  });
+  var total=pass[0]+pass[1],pct=Math.round(total/TESTS.length*100),p0=Math.round(pass[0]/cnt[0]*100),p1=Math.round(pass[1]/cnt[1]*100);
+  var v=pct===100?'🤖 ИИ: Все тесты пройдены, включая граничные случаи. Кандидат готов к техническому собеседованию.':pct>=60?'🤖 ИИ: Базовая логика реализована. Стоит доработать граничные случаи — предложим кандидату исправить решение.':'🤖 ИИ: Нужна дополнительная практика. Рекомендуем повторить массивы, reduce и условия.';
+  rep.innerHTML='<h3 style="margin:18px 0 4px">Отчёт для HR</h3>'+[['Основная логика',p0],['Граничные случаи',p1],['Общий результат',pct]].map(function(d){return '<div class="sk"><div class="r"><span>'+d[0]+'</span><span>'+d[1]+'%</span></div><div class="bar"><i data-w="'+d[1]+'"></i></div></div>'}).join('')+'<div class="note">'+v+'</div>';
+  rep.style.display='block';
+  setTimeout(function(){rep.querySelectorAll('i').forEach(function(i){i.style.width=i.dataset.w+'%'})},60);
+});
+</script>
+</body>
+</html>
